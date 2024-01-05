@@ -15,3 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "caseStudy"
 include ':app'
+include ':core:common'
+include ':core:data'
+include ':feature:search'
+include ':feature:search_list'
+include ':feature:search_detail'
