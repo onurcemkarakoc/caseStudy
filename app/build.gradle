@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:search"))
+    implementation(project(":feature:search_detail"))
+    implementation(project(":feature:search_list"))
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

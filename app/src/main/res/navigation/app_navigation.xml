@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_navigation.xml"
-    app:startDestination="@id/blankFragment">
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/search_navigation">
 
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.onurcem.casestudy.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+    <include app:graph="@navigation/search_navigation" />
+    <include app:graph="@navigation/search_detail_navigation" />
+    <include app:graph="@navigation/search_list_navigation" />
+
 </navigation>
