@@ -22,7 +22,7 @@ class SearchDetailFragment :
     override fun onDataBound() {
         handleState(searchDetailViewModel)
         binding.apply {
-            tvItemId.text = itemId
+            tvItemId.text = "$itemId detail page"
         }
     }
 

@@ -1,9 +1,12 @@
 package com.onurcem.feature.search_list.presentation
 
+import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.onurcem.core.common.base.BaseFragment
+import com.onurcem.core.common.utils.toDetail
 import com.onurcem.feature.search_list.SearchListNavigationArgs
 import com.onurcem.feature.search_list.databinding.FragmentSearchListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,22 +23,34 @@ class SearchListFragment :
 
     private val searchListViewModel: SearchListViewModel by viewModels()
 
+    private val searchListAdapter: SearchListAdapter by lazy {
+        SearchListAdapter{
+            findNavController().toDetail(it)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        searchListViewModel.getFlightData(searchId)
+    }
+
 
     override fun onDataBound() {
         handleState(searchListViewModel)
-        binding.apply {
-            tvSearchId.text = searchId
-            btnToSearchDetail.setOnClickListener {
-                searchListViewModel.getFlightData("PC1251:G:2022-06-28 08:40:00:20X1")
-            }
-        }
+        binding.rvSearchList.adapter = searchListAdapter
         observers()
     }
 
     private fun observers() {
         searchListViewModel.data.observe(viewLifecycleOwner) {
             binding.apply {
-                tvSearchId.text = it.toString()
+                it.airlines?.map { airline ->
+                    airline.name.orEmpty()
+                }?.let { list ->
+                    searchListAdapter.updateList(list)
+                }
+
+
                 tvError.isVisible = false
                 clSearchList.isVisible = true
             }
