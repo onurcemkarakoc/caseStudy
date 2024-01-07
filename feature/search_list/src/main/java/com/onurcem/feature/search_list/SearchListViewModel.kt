@@ -1,5 +1,5 @@
 package com.onurcem.feature.search_list
 
-import androidx.lifecycle.ViewModel
+import com.onurcem.core.common.base.BaseViewModel
 
-class SearchListViewModel: ViewModel()
+class SearchListViewModel : BaseViewModel()
