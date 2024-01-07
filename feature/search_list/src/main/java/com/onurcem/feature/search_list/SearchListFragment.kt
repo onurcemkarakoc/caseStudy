@@ -1,16 +1,17 @@
 package com.onurcem.feature.search_list
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.onurcem.core.common.base.BaseFragment
 import com.onurcem.core.common.utils.toDetail
 import com.onurcem.feature.search_list.databinding.FragmentSearchListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchListFragment : Fragment() {
+@AndroidEntryPoint
+class SearchListFragment :
+    BaseFragment<FragmentSearchListBinding>(FragmentSearchListBinding::inflate) {
 
     private val args by navArgs<SearchListNavigationArgs>()
 
@@ -18,29 +19,26 @@ class SearchListFragment : Fragment() {
         args.searchId
     }
 
-    private var binding: FragmentSearchListBinding? = null
+    private val searchListViewModel: SearchListViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSearchListBinding.inflate(inflater)
-        binding?.apply {
+
+    override fun onDataBound() {
+        handleState(searchListViewModel)
+        binding.apply {
             tvSearchId.text = searchId
             btnToSearchDetail.setOnClickListener {
                 findNavController().toDetail("PC1251:G:2022-06-28 08:40:00:20X1")
             }
         }
-        return binding?.root
     }
 
-    override fun onDestroyView() {
-        binding = null
-        super.onDestroyView()
-    }
-    companion object {
-        @JvmStatic
-        fun newInstance() = SearchListFragment()
+    override fun onError(message: String?) {
+        message?.let {
+            binding.apply {
+                tvError.text = it
+                tvError.isVisible = true
+                clSearchList.isVisible = false
+            }
+        }
     }
 }
