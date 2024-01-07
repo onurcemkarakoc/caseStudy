@@ -10,4 +10,13 @@
         android:name="com.onurcem.feature.search_detail.SearchDetailFragment"
         android:label="fragment_search_detail"
         tools:layout="@layout/fragment_search_detail" />
+
+    <argument
+        android:name="itemId"
+        android:defaultValue=""
+        app:argType="string"
+        app:nullable="false" />
+
+    <deepLink app:uri="onurcem://search_detail/?itemId={itemId}" />
+
 </navigation>

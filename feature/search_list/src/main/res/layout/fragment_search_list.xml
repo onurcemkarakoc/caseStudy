@@ -6,8 +6,15 @@
     tools:context=".SearchListFragment">
 
     <TextView
+        android:id="@+id/tv_search_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="search_list_fragment" />
 
+    <Button
+        android:id="@+id/btn_to_search_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Go to Search Detail" />
 </FrameLayout>
