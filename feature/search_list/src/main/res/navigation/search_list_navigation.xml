@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/searchListFragment"
-        android:name="com.onurcem.feature.search_list.SearchListFragment"
+        android:name="com.onurcem.feature.search_list.presentation.SearchListFragment"
         android:label="fragment_search_list"
         tools:layout="@layout/fragment_search_list" />
 
